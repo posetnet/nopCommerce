@@ -12033,6 +12033,9 @@
   <LocaleResource Name="Admin.Orders.Shipments.DeliveryDate.Button">
     <Value>Set as delivered</Value>
   </LocaleResource>
+  <LocaleResource Name="Admin.Orders.Shipments.HasDelivered">
+    <Value>Delivered</Value>
+  </LocaleResource>
   <LocaleResource Name="Admin.Orders.Shipments.DeliveryDate.EnterUtc">
     <Value>Date and time should be entered in Coordinated Universal Time (UTC)</Value>
   </LocaleResource>
@@ -12184,6 +12187,9 @@
     <Value>Date shipped</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Shipments.ShippedDate.Button">
+    <Value>Shipped</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Orders.Shipments.HasShipped">
     <Value>Set as shipped</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Shipments.ShippedDate.EnterUtc">

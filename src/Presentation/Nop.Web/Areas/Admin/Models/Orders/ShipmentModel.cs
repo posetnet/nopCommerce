@@ -41,14 +41,16 @@ namespace Nop.Web.Areas.Admin.Models.Orders
         [NopResourceDisplayName("Admin.Orders.Shipments.ShippedDate")]
         public string ShippedDate { get; set; }
 
-        public bool CanShip { get; set; }
+        [NopResourceDisplayName("Admin.Orders.Shipments.HasShipped")]
+        public bool HasShipped { get; set; }
 
         public DateTime? ShippedDateUtc { get; set; }
 
         [NopResourceDisplayName("Admin.Orders.Shipments.DeliveryDate")]
         public string DeliveryDate { get; set; }
 
-        public bool CanDeliver { get; set; }
+        [NopResourceDisplayName("Admin.Orders.Shipments.HasDelivered")]
+        public bool HasDelivered { get; set; }
 
         public DateTime? DeliveryDateUtc { get; set; }
 

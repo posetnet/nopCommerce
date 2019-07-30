@@ -1344,8 +1344,8 @@ namespace Nop.Web.Areas.Admin.Factories
                         : _localizationService.GetResource("Admin.Orders.Shipments.DeliveryDate.NotYet");
 
                     //fill in additional values (not existing in the entity)
-                    shipmentModel.CanShip = !shipment.ShippedDateUtc.HasValue;
-                    shipmentModel.CanDeliver = shipment.ShippedDateUtc.HasValue && !shipment.DeliveryDateUtc.HasValue;
+                    shipmentModel.HasShipped = !shipment.ShippedDateUtc.HasValue;
+                    shipmentModel.HasDelivered = shipment.ShippedDateUtc.HasValue && !shipment.DeliveryDateUtc.HasValue;
                     shipmentModel.CustomOrderNumber = shipment.Order.CustomOrderNumber;
 
                     if (shipment.TotalWeight.HasValue)
@@ -1374,8 +1374,8 @@ namespace Nop.Web.Areas.Admin.Factories
                 //fill in model values from the entity
                 model = model ?? shipment.ToModel<ShipmentModel>();
 
-                model.CanShip = !shipment.ShippedDateUtc.HasValue;
-                model.CanDeliver = shipment.ShippedDateUtc.HasValue && !shipment.DeliveryDateUtc.HasValue;
+                model.HasShipped = !shipment.ShippedDateUtc.HasValue;
+                model.HasDelivered = shipment.ShippedDateUtc.HasValue && !shipment.DeliveryDateUtc.HasValue;
                 model.CustomOrderNumber = shipment.Order.CustomOrderNumber;
 
                 model.ShippedDate = shipment.ShippedDateUtc.HasValue
@@ -1530,8 +1530,8 @@ namespace Nop.Web.Areas.Admin.Factories
                         : _localizationService.GetResource("Admin.Orders.Shipments.DeliveryDate.NotYet");
 
                     //fill in additional values (not existing in the entity)
-                    shipmentModel.CanShip = !shipment.ShippedDateUtc.HasValue;
-                    shipmentModel.CanDeliver = shipment.ShippedDateUtc.HasValue && !shipment.DeliveryDateUtc.HasValue;
+                    shipmentModel.HasShipped = !shipment.ShippedDateUtc.HasValue;
+                    shipmentModel.HasDelivered = shipment.ShippedDateUtc.HasValue && !shipment.DeliveryDateUtc.HasValue;
                     shipmentModel.CustomOrderNumber = shipment.Order.CustomOrderNumber;
 
                     var baseWeight = _measureService.GetMeasureWeightById(_measureSettings.BaseWeightId)?.Name;

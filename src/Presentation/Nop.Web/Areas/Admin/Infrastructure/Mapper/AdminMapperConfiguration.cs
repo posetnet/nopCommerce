@@ -1473,8 +1473,8 @@ namespace Nop.Web.Areas.Admin.Infrastructure.Mapper
                 .ForMember(model => model.TrackingNumberUrl, options => options.Ignore())
                 .ForMember(model => model.Items, options => options.Ignore())
                 .ForMember(model => model.ShipmentStatusEvents, options => options.Ignore())
-                .ForMember(model => model.CanShip, options => options.Ignore())
-                .ForMember(model => model.CanDeliver, options => options.Ignore())
+                .ForMember(model => model.HasShipped, options => options.Ignore())
+                .ForMember(model => model.HasDelivered, options => options.Ignore())
                 .ForMember(model => model.CustomOrderNumber, options => options.Ignore());
 
             CreateMap<ShippingSettings, ShippingSettingsModel>()
