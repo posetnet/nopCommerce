@@ -12187,10 +12187,10 @@
     <Value>Date shipped</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Shipments.ShippedDate.Button">
-    <Value>Shipped</Value>
+    <Value>Set as shipped</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Shipments.HasShipped">
-    <Value>Set as shipped</Value>
+    <Value>Shipped</Value>
   </LocaleResource>
   <LocaleResource Name="Admin.Orders.Shipments.ShippedDate.EnterUtc">
     <Value>Date and time should be entered in Coordinated Universal Time (UTC)</Value>
