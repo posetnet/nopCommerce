@@ -511,7 +511,9 @@ namespace Nop.Web.Controllers
         [CheckAccessPublicStore(true)]
         public virtual IActionResult PasswordRecovery()
         {
-            var model = _customerModelFactory.PreparePasswordRecoveryModel();
+            var model = new PasswordRecoveryModel();
+            model = _customerModelFactory.PreparePasswordRecoveryModel(model);
+
             return View(model);
         }
 
@@ -552,11 +554,9 @@ namespace Nop.Web.Controllers
                 {
                     model.Result = _localizationService.GetResource("Account.PasswordRecovery.EmailNotFound");
                 }
-
-                return View(model);
             }
 
-            //If we got this far, something failed, redisplay form
+            model = _customerModelFactory.PreparePasswordRecoveryModel(model);
             return View(model);
         }
 
@@ -742,7 +742,7 @@ namespace Nop.Web.Controllers
                     {
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.VatNumberAttribute, model.VatNumber);
 
-                        var vatNumberStatus = _taxService.GetVatNumberStatus(model.VatNumber, out string _, out string vatAddress);
+                        var vatNumberStatus = _taxService.GetVatNumberStatus(model.VatNumber, out _, out var vatAddress);
                         _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.VatNumberStatusIdAttribute, (int)vatNumberStatus);
                         //send VAT number admin notification
                         if (!string.IsNullOrEmpty(model.VatNumber) && _taxSettings.EuVatEmailAdminWhenNewVatSubmitted)
@@ -932,6 +932,9 @@ namespace Nop.Web.Controllers
                                 //send customer welcome message
                                 _workflowMessageService.SendCustomerWelcomeMessage(customer, _workContext.WorkingLanguage.Id);
 
+                                //raise event       
+                                _eventPublisher.Publish(new CustomerActivatedEvent(customer));
+
                                 var redirectUrl = Url.RouteUrl("RegisterResult",
                                     new { resultId = (int)UserRegistrationType.Standard, returnUrl }, _webHelper.CurrentRequestProtocol);
                                 return Redirect(redirectUrl);
@@ -1038,6 +1041,9 @@ namespace Nop.Web.Controllers
             //send welcome message
             _workflowMessageService.SendCustomerWelcomeMessage(customer, _workContext.WorkingLanguage.Id);
 
+            //raise event       
+            _eventPublisher.Publish(new CustomerActivatedEvent(customer));
+
             var model = new AccountActivationModel
             {
                 Result = _localizationService.GetResource("Account.AccountActivation.Activated")
@@ -1134,7 +1140,7 @@ namespace Nop.Web.Controllers
                             model.VatNumber);
                         if (prevVatNumber != model.VatNumber)
                         {
-                            var vatNumberStatus = _taxService.GetVatNumberStatus(model.VatNumber, out string _, out string vatAddress);
+                            var vatNumberStatus = _taxService.GetVatNumberStatus(model.VatNumber, out _, out var vatAddress);
                             _genericAttributeService.SaveAttribute(customer, NopCustomerDefaults.VatNumberStatusIdAttribute, (int)vatNumberStatus);
                             //send VAT number admin notification
                             if (!string.IsNullOrEmpty(model.VatNumber) && _taxSettings.EuVatEmailAdminWhenNewVatSubmitted)
